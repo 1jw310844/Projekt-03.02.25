@@ -23,9 +23,9 @@ public:
     double getZaklocenie();
     double getSterowanie();
     double getWyjscieObiektu();
-    void setGenerator(Generator g);
-    void setRegulator(Regulator r);
-    void setObiektARX(ObiektARX o);
+    void setGenerator(Generator &g);
+    void setRegulator(Regulator &r);
+    void setObiektARX(ObiektARX &o);
     Generator getGenerator();
     Regulator getRegulator();
     ObiektARX getObiektARX();

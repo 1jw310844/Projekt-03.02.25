@@ -14,7 +14,7 @@
 #include <QtWidgets/QMainWindow>
 #include "symulator.h"
 #include <QtWidgets>
-
+#include "generator.h"
 class MainWindow;
 
 class WarstwaUslug : public QObject

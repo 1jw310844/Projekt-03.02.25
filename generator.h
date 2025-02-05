@@ -1,14 +1,17 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
+#include <QString>
 enum class RodzajSygnalu { Skok, Sinusoida, Prostokatny };
-
+QString RodzajSygnaluToString(RodzajSygnalu rodzaj);
 class Generator {
     RodzajSygnalu rodzaj;
     double A, T, p, czasAktywacji;
 
 public:
-    Generator(RodzajSygnalu r = RodzajSygnalu::Skok, double a = 0.0, double t = 1.0, double pp = 0.5, double czasAkt = 0.0);
+
+    //Generator(RodzajSygnalu r = RodzajSygnalu::Skok, double a = 0.0, double t = 1.0, double pp = 0.5, double czasAkt = 0.0);
+    Generator();
     double generuj(double czas);
 
     RodzajSygnalu getRodzaj() const { return rodzaj; }

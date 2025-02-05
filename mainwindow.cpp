@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent, WarstwaUslug *prog)
 {
     usluga->setGUI(this);
     ui->setupUi(this);
-    wykres = new Wykresy(this);
+    wykres = new Wykresy(this,usluga->getSymulator());
     okno_gen = new OknoGenerator();
     okno_gen->setWarstwaUslug(usluga);
     okno_reg = new OknoRegulator();
@@ -76,6 +76,7 @@ void MainWindow::on_Start_clicked()
     qDebug()<<"Wzmocnienie: " << usluga->getSymulator()->getRegulator().getWzmocnienie();
 */
 }
+
 void MainWindow::Sprawdzenie(symulator* s)
 {
     s->symulujKrok(0.0);
@@ -142,7 +143,7 @@ void MainWindow::PokazWykres(symulator* s) {
     //s->getWartoscZadana();
     //s->getWyjscieObiektu();
     //s->getSterowanie();
-    wykres->setSymulator(s);
+    //wykres->setSymulator(s);
 
     connect(simulationTimer, &QTimer::timeout, this, [=]() {
         wykres->WykresWartosciZadanej();

@@ -1,5 +1,6 @@
 #include "regulator.h"
 
+
 Regulator::Regulator(double kp, double ki, double kd)
     : wartoscZadana(0), wzmocnienieP(kp), stalaI(ki), stalaD(kd), Uchyb(0), WczesniejszyUchyb(0), sumaUchybow(0), WartoscSterujaca(0) {}
 void Regulator::setWartoscZadana(double war) { wartoscZadana = war; }
@@ -12,14 +13,20 @@ void Regulator::aktualizujUchyb(double wartoscRegulowana) {
         sumaUchybow += Uchyb;
     }
 }
-Regulator::Regulator(){};
+Regulator::Regulator()
+    : wartoscZadana(0), wzmocnienieP(0), stalaI(0), stalaD(0),
+    Uchyb(0), WczesniejszyUchyb(0), sumaUchybow(0), WartoscSterujaca(0) {}
+
 
 double Regulator::obliczSterowanie() {
     nastawaP = wzmocnienieP * Uchyb;
     nastawaI = 0;
-    if (stalaI != 0) {
+    if (std::abs(stalaI) > 1e-6) { // Unikamy dzielenia przez prawie zero
         nastawaI = sumaUchybow / stalaI;
+    } else {
+        nastawaI = 0;
     }
+
     nastawaD = stalaD * (Uchyb - WczesniejszyUchyb);
 
     WartoscSterujaca = nastawaP + nastawaI + nastawaD;

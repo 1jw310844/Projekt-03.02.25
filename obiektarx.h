@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 #include <deque>
+#include <QDebug>
 
 class ObiektARX
 {
@@ -14,6 +15,7 @@ class ObiektARX
     std::mt19937 generator;
     std::normal_distribution<double> zaklocenie;
     void zaktualizujZaklocenie();
+    bool GenerowacZaklocenie=false;
 public:
     ObiektARX();
     ObiektARX(double kk, double zz, std::vector<double> aa, std::vector<double> bb, std::mt19937 gen, double mean = 0.3, double stdev = 0.0);
@@ -29,6 +31,9 @@ public:
     void setGenerator(std::mt19937 g){generator = g;}
     void setMean(double m){mean =m;}
     void setStdev(double s){stdev =s;}
+    void setGenerowacZaklocenie(bool z){GenerowacZaklocenie=z;}
+    bool getGenerowacZaklocenie(){return GenerowacZaklocenie;}
+
 };
 
 #endif // OBIEKTARX_H

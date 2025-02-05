@@ -6,6 +6,7 @@ OknoObiektARX::OknoObiektARX(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::OknoObiektARX)
 
+
 {
     ui->setupUi(this);
     obiekt = new ObiektARX;
@@ -31,6 +32,7 @@ OknoObiektARX::OknoObiektARX(QWidget *parent)
     ui->B2->setSingleStep(0.1);
     ui->B3->setSingleStep(0.1);
     ui->Opoznienie->setSingleStep(0.1);
+    //ui->Zaklocenie->setCheckState(Qt::Checked);
     UstawienieARX();
 }
 
@@ -40,7 +42,7 @@ OknoObiektARX::~OknoObiektARX()
     this->ui=nullptr;
     delete this->usluga;
     this->usluga=nullptr;
-    delete this->obiekt;
+    //delete this->obiekt;
     this->obiekt=nullptr;
 }
 
@@ -49,7 +51,9 @@ void OknoObiektARX::on_ZatwierdzenieUstawien_accepted()
     obiekt->setOpoznienie(ui->Opoznienie->value());
     obiekt->setWielomianA({ui->A1->value(), ui->A2->value(), ui->A3->value()});
     obiekt->setWielomianB({ui->B1->value(), ui->B2->value(), ui->B3->value()});
+    obiekt->setGenerowacZaklocenie(ui->Zaklocenie->isChecked());
     usluga->SprawdzenieObiektu(obiekt);
+
 }
 void OknoObiektARX::UstawienieARX()
 {
@@ -81,6 +85,14 @@ void OknoObiektARX::UstawienieARX()
         "    padding: 5px;"
         "}"
         );
+    ui->ZaklocenieLabel->setStyleSheet(
+        "QLabel {"
+        "    background-color: grey;"
+        "    color: white;"
+        "    border: 1px solid black;"
+        "    padding: 5px;"
+        "}"
+        );
     ui->label_7->setStyleSheet(
         "QLabel {"
         "    background-color: grey;"
@@ -90,3 +102,6 @@ void OknoObiektARX::UstawienieARX()
         "}"
         );
 }
+
+
+

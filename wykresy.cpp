@@ -1,22 +1,9 @@
 #include "wykresy.h"
 
-Wykresy::Wykresy(QWidget *parent)
-    : QObject(nullptr),parent(parent)
+Wykresy::Wykresy(QWidget *parent,symulator* sym)
+    : QObject(nullptr),parent(parent),s(sym),czas(0.0)
 {
-    s=new symulator();
-    /*
-    for(int i = 0; i < 7; i++)
-    {
-        seria[i] = new QLineSeries();
-    }
-    for(int j = 0; j<4; j++)
-    {
-        wykres[j] = new QChart();
-        osY[j] = new QValueAxis();
-        osX[j] = new QValueAxis();
-        Widok[j] = new QChartView(wykres[j]);
-    }
-*/
+
 }
 
 Wykresy::~Wykresy()
@@ -31,7 +18,7 @@ Wykresy::~Wykresy()
         if (Widok[i]) delete Widok[i];
     }
 
-    delete s;
+    //delete s;
 }
 
 void Wykresy::wyczyscLayout(QLayout* layout) {
@@ -57,7 +44,9 @@ void Wykresy::inicjalizacjaWykresuWartosciZadanej(QVBoxLayout *layout){
     wykres[0]->addSeries(seria[0]);
     wykres[0]->addSeries(seria[1]);
     osX[0] = new QValueAxis();
-    osX[0]->setRange(0, 30);
+    osX[0]->setRange(0, 1000);
+
+
     osY[0] = new QValueAxis();
     osY[0]->setRange(0, 10);
     wykres[0]->addAxis(osX[0], Qt::AlignBottom);
@@ -78,7 +67,7 @@ void Wykresy::inicjalizacjaWykresuUchybu(QVBoxLayout *layout){
     wykres[1] = new QChart();
     wykres[1]->addSeries(seria[2]);
     osX[1] = new QValueAxis();
-    osX[1]->setRange(0, 30);
+    osX[1]->setRange(0, 400);
     osY[1] = new QValueAxis();
     osY[1]->setRange(0, 10);
     wykres[1]->addAxis(osX[1], Qt::AlignBottom);
@@ -105,7 +94,7 @@ void Wykresy::inicjalizacjaWykresuPID(QVBoxLayout *layout){
     wykres[2]->addSeries(seria[4]);
     wykres[2]->addSeries(seria[5]);
     osX[2] = new QValueAxis();
-    osX[2]->setRange(0, 30);
+    osX[2]->setRange(0, 400);
     osY[2] = new QValueAxis();
     osY[2]->setRange(0, 10);
     wykres[2]->addAxis(osX[2], Qt::AlignBottom);
@@ -128,7 +117,7 @@ void Wykresy::inicjalizacjaWykresuWartosciSterowania(QVBoxLayout *layout){
     wykres[3] = new QChart();
     wykres[3]->addSeries(seria[6]);
     osX[3] = new QValueAxis();
-    osX[3]->setRange(0, 30);
+    osX[3]->setRange(0, 400);
     osY[3] = new QValueAxis();
     osY[3]->setRange(0, 10);
     wykres[3]->addAxis(osX[3], Qt::AlignBottom);
@@ -141,11 +130,16 @@ void Wykresy::inicjalizacjaWykresuWartosciSterowania(QVBoxLayout *layout){
     layout->addWidget(Widok[3]);
 }
 void Wykresy::WykresWartosciZadanej() {
+    if (!s) {
+        qDebug() << "Błąd: wskaźnik 's' nie został poprawnie zainicjalizowany!";
+        return;
+    }
+
     double wyjscieObiektu = s->symulujKrok(czas);
     seria[0]->append(czas, wyjscieObiektu);
     seria[1]->append(czas, s->getWartoscZadana());
 
-    const int maxPoints = 30;
+    const int maxPoints = 1000;
     if (seria[0]->count() > maxPoints) {
         seria[0]->remove(0);
         seria[1]->remove(0);
@@ -153,6 +147,8 @@ void Wykresy::WykresWartosciZadanej() {
 
     if (czas > maxPoints) {
         osX[0]->setRange(czas - maxPoints, czas);
+
+
     }
 
     Generator generator = s->getGenerator();
@@ -176,6 +172,7 @@ void Wykresy::WykresWartosciZadanej() {
     double margin = (maxY - minY) * 0.1;
     osY[0]->setRange(minY - margin, maxY + margin);
     czas++;
+
 }
 
 
@@ -184,13 +181,13 @@ void Wykresy::WykresUchybu() {
     Q_UNUSED(wyjscieObiektu);
     double uchyb = s->getRegulator().getUchyb();
     seria[2]->append(czas, uchyb);
-    const int maxPoints = 30;
+    const int maxPoints = 400;
     if (seria[2]->count() > maxPoints) {
         seria[2]->remove(0);
     }
 
-    if (czas > 30) {
-        osX[1]->setRange(czas - 30, czas);
+    if (czas > maxPoints) {
+        osX[1]->setRange(czas - maxPoints, czas);
     }
 
     double minY = uchyb;
@@ -200,7 +197,8 @@ void Wykresy::WykresUchybu() {
         minY = std::min(minY, yValue);
         maxY = std::max(maxY, yValue);
     }
-    double margin = 0.1 * (maxY - minY);
+    double margin = std::max(0.1 * (maxY - minY), 0.01);
+
     osY[1]->setRange(minY - margin, maxY + margin);
     czas++;
 }
@@ -213,7 +211,7 @@ void Wykresy::WykresPID() {
     seria[4]->append(czas, regulator.getNastawaI());
     seria[5]->append(czas, regulator.getNastawaD());
 
-    const int maxPoints = 30;
+    const int maxPoints = 400;
     if (seria[3]->count() > maxPoints) {
         seria[3]->remove(0);
         seria[4]->remove(0);
@@ -251,13 +249,13 @@ void Wykresy::WykresWartosciSterowania(){
     double Sterujaca = s->getRegulator().getWartoscSterujaca();
     seria[6]->append(czas, Sterujaca);
 
-    const int maxPoints = 30;
+    const int maxPoints = 400;
     if (seria[6]->count() > maxPoints) {
         seria[6]->remove(0);
     }
 
-    if (czas > 30) {
-        osX[3]->setRange(czas - 30, czas);
+    if (czas > maxPoints) {
+        osX[3]->setRange(czas - maxPoints, czas);
     }
 
     double minY = Sterujaca;
@@ -269,7 +267,7 @@ void Wykresy::WykresWartosciSterowania(){
         maxY = std::max(maxY, yValue);
     }
 
-    double margin = 0.1 * (maxY - minY);
+    double margin = std::max(0.1 * (maxY - minY), 0.01);
     osY[3]->setRange(minY - margin, maxY + margin);
     czas++;
 }
@@ -286,4 +284,9 @@ void Wykresy::InicjalizujWykresy(QVBoxLayout *layout[4] ){
     inicjalizacjaWykresuUchybu(layout[1]);
     inicjalizacjaWykresuPID(layout[2]);
     inicjalizacjaWykresuWartosciSterowania(layout[3]);
+}
+void Wykresy::AktualizujWykresy(){
+    for(int i=0;i<4;i++){
+        Widok[i]->update();
+    }
 }

@@ -1,5 +1,5 @@
 #include "warstwauslug.h"
-
+#include "generator.h"
 WarstwaUslug::WarstwaUslug(QObject *parent)
     : QObject{parent}, s(new symulator())
 {}
@@ -22,6 +22,8 @@ void WarstwaUslug::SprawdzenieRegulatora(Regulator* r){
     }
 }
 
+
+
 void WarstwaUslug::SprawdzenieObiektu(ObiektARX* o){
     int a = 0, b = 0;
     for(double wsp : o->getWielomianA()) {
@@ -31,9 +33,12 @@ void WarstwaUslug::SprawdzenieObiektu(ObiektARX* o){
         if(wsp == 0) b++;
     }
     if(b != 3 && a != 3 && o->getOpoznienie() >= 0) {
+
         s->setObiektARX(*o);
+
     }
 }
+
 
 void WarstwaUslug::SprawdzenieWszystkichDanych(double i) {
     bool poprawnyGenerator = true;
@@ -41,45 +46,63 @@ void WarstwaUslug::SprawdzenieWszystkichDanych(double i) {
     bool poprawnyObiekt = true;
 
     Generator generator = s->getGenerator();
+
+    qDebug() << "Sprawdzam generator typu: " << RodzajSygnaluToString(generator.getRodzaj());
+
     if (generator.getRodzaj() == RodzajSygnalu::Skok && generator.getAmplituda() <= 0) {
         poprawnyGenerator = false;
-    } else if (generator.getRodzaj() == RodzajSygnalu::Sinusoida &&
-               (generator.getAmplituda() <= 0 || generator.getOkres() <= 0)) {
-        poprawnyGenerator = false;
-    } else if (generator.getRodzaj() == RodzajSygnalu::Prostokatny &&
-               (generator.getAmplituda() <= 0 || generator.getOkres() <= 0 ||
-                generator.getWypelnienie() <= 0 || generator.getWypelnienie() > 1)) {
-        poprawnyGenerator = false;
+        qDebug() << "Błędna amplituda dla skoku!";
+    }
+    else if (generator.getRodzaj() == RodzajSygnalu::Sinusoida) {
+        qDebug() << "Sprawdzam sinusoidę - Amplituda: " << generator.getAmplituda()
+        << " Okres: " << generator.getOkres();
+        if (generator.getAmplituda() <= 0 || generator.getOkres() <= 0) {
+            poprawnyGenerator = false;
+            qDebug() << "Błędne dane dla sinusoidy!";
+        }
+    }
+    else if (generator.getRodzaj() == RodzajSygnalu::Prostokatny) {
+        if (generator.getAmplituda() <= 0 || generator.getOkres() <= 0 ||
+            generator.getWypelnienie() <= 0 || generator.getWypelnienie() > 1) {
+            poprawnyGenerator = false;
+            qDebug() << "Błędne dane dla prostokątnego sygnału!";
+        }
     }
 
+    // Sprawdzanie regulatora
     Regulator regulator = s->getRegulator();
     if (regulator.getStalaD() < 0 || regulator.getStalaI() < 0 || regulator.getWzmocnienie() < 0 ||
         (regulator.getStalaD() == 0 && regulator.getStalaI() == 0 && regulator.getWzmocnienie() == 0)) {
         poprawnyRegulator = false;
+        qDebug() << "Błędne dane dla regulatora!";
     }
+
+    // Sprawdzanie obiektu ARX
     ObiektARX obiekt = s->getObiektARX();
     int liczbaZerA = 0;
     int liczbaZerB = 0;
-
     for (double wsp : obiekt.getWielomianA()) {
         if (wsp == 0) liczbaZerA++;
     }
-
     for (double wsp : obiekt.getWielomianB()) {
         if (wsp == 0) liczbaZerB++;
     }
-
     if (liczbaZerA == 3 || liczbaZerB == 3 || obiekt.getOpoznienie() < 0) {
         poprawnyObiekt = false;
+        qDebug() << "Błędne dane dla obiektu ARX!";
     }
 
-
-    if (!poprawnyGenerator || !poprawnyRegulator || !poprawnyObiekt||i<=0) {
+    // Emitowanie sygnałów
+    if (!poprawnyGenerator || !poprawnyRegulator || !poprawnyObiekt || i <= 0) {
         emit BledneDane();
     } else {
         emit PoprawneDane(s);
     }
 }
+
+
+
+
 
 
 void WarstwaUslug::zapiszKonfiguracje() {    

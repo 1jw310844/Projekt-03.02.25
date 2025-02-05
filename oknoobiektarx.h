@@ -20,6 +20,8 @@ public:
     void UstawienieARX();
 private slots:
     void on_ZatwierdzenieUstawien_accepted();
+
+
 private:
     Ui::OknoObiektARX *ui;
     ObiektARX *obiekt;

@@ -1,6 +1,8 @@
 #include "obiektarx.h"
 
-ObiektARX::ObiektARX(){}
+ObiektARX::ObiektARX()
+    : k(0), z(0), mean(0.3), stdev(0.1), generator(std::random_device{}()), zaklocenie(mean, stdev) {}
+
 
 ObiektARX::ObiektARX(double kk, double zz, std::vector<double> aa, std::vector<double> bb, std::mt19937 gen, double mean, double stdev)
     : k(kk), z(zz), a(aa), b(bb), ui(bb.size() + static_cast<int>(kk), 0),
@@ -38,8 +40,16 @@ double ObiektARX::obliczWyjscie(double uii) {
             wynik -= a[j] * yi[j];
         }
     }
-    z = zaklocenie(generator);
-    wynik += z;
+
+    if (GenerowacZaklocenie) {
+        qDebug() << "Zaklocenie jest WŁĄCZONE";
+        z = zaklocenie(generator);
+        wynik += z;
+    } else {
+        qDebug() << "Zaklocenie jest WYŁĄCZONE";
+    }
+
+
 
     yi.push_front(wynik);
     if (yi.size() > a.size()) {

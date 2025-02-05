@@ -1,8 +1,14 @@
 #include "generator.h"
 #include <cmath>
 
-Generator::Generator(RodzajSygnalu r, double a, double t, double pp, double czasAkt)
-    : rodzaj(r), A(a), T((t > 0) ? t : 1.0), p((pp >= 0 && pp <= 1) ? pp : 0.5), czasAktywacji(czasAkt) {}
+//Generator::Generator(RodzajSygnalu r, double a, double t, double pp, double czasAkt)
+//    : rodzaj(r), A(a), T((t > 0) ? t : 1.0), p((pp >= 0 && pp <= 1) ? pp : 0.5), czasAktywacji(czasAkt) {}
+
+Generator::Generator():
+    rodzaj(RodzajSygnalu::Skok), A(0), T(0), p(0),czasAktywacji(0)
+{
+
+}
 
 double Generator::generuj(double czas) {
     switch (rodzaj) {
@@ -14,5 +20,17 @@ double Generator::generuj(double czas) {
         return (std::fmod(czas, T) < p * T) ? A : 0;
     default:
         return 0.0;
+    }
+}
+QString RodzajSygnaluToString(RodzajSygnalu rodzaj) {
+    switch (rodzaj) {
+    case RodzajSygnalu::Skok:
+        return "Skok";
+    case RodzajSygnalu::Sinusoida:
+        return "Sinusoida";
+    case RodzajSygnalu::Prostokatny:
+        return "Prostokatny";
+    default:
+        return "Nieznany";
     }
 }

@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAbstractButton>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QDoubleSpinBox>
@@ -41,6 +42,8 @@ public:
     QLabel *OpoznienieLabel;
     QLabel *ALebel;
     QDoubleSpinBox *Opoznienie;
+    QCheckBox *Zaklocenie;
+    QLabel *ZaklocenieLabel;
 
     void setupUi(QDialog *OknoObiektARX)
     {
@@ -54,7 +57,7 @@ public:
         ZatwierdzenieUstawien->setStandardButtons(QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok);
         label_7 = new QLabel(OknoObiektARX);
         label_7->setObjectName("label_7");
-        label_7->setGeometry(QRect(100, 60, 191, 31));
+        label_7->setGeometry(QRect(100, 30, 191, 31));
         QFont font;
         font.setPointSize(8);
         font.setBold(true);
@@ -62,7 +65,7 @@ public:
         label_7->setAlignment(Qt::AlignmentFlag::AlignCenter);
         layoutWidget = new QWidget(OknoObiektARX);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(100, 90, 191, 41));
+        layoutWidget->setGeometry(QRect(100, 60, 191, 41));
         horizontalLayout_3 = new QHBoxLayout(layoutWidget);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -91,12 +94,12 @@ public:
 
         Blebel = new QLabel(OknoObiektARX);
         Blebel->setObjectName("Blebel");
-        Blebel->setGeometry(QRect(70, 140, 31, 21));
+        Blebel->setGeometry(QRect(70, 110, 31, 21));
         Blebel->setFont(font);
         Blebel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         layoutWidget_2 = new QWidget(OknoObiektARX);
         layoutWidget_2->setObjectName("layoutWidget_2");
-        layoutWidget_2->setGeometry(QRect(100, 130, 191, 41));
+        layoutWidget_2->setGeometry(QRect(100, 100, 191, 41));
         horizontalLayout_4 = new QHBoxLayout(layoutWidget_2);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -117,14 +120,14 @@ public:
 
         OpoznienieLabel = new QLabel(OknoObiektARX);
         OpoznienieLabel->setObjectName("OpoznienieLabel");
-        OpoznienieLabel->setGeometry(QRect(120, 180, 91, 25));
+        OpoznienieLabel->setGeometry(QRect(120, 150, 91, 25));
         QFont font2;
         font2.setBold(true);
         OpoznienieLabel->setFont(font2);
         OpoznienieLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         ALebel = new QLabel(OknoObiektARX);
         ALebel->setObjectName("ALebel");
-        ALebel->setGeometry(QRect(70, 100, 31, 21));
+        ALebel->setGeometry(QRect(70, 70, 31, 21));
         QFont font3;
         font3.setPointSize(9);
         font3.setBold(true);
@@ -132,7 +135,17 @@ public:
         ALebel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         Opoznienie = new QDoubleSpinBox(OknoObiektARX);
         Opoznienie->setObjectName("Opoznienie");
-        Opoznienie->setGeometry(QRect(210, 180, 61, 21));
+        Opoznienie->setGeometry(QRect(210, 150, 61, 21));
+        Zaklocenie = new QCheckBox(OknoObiektARX);
+        Zaklocenie->setObjectName("Zaklocenie");
+        Zaklocenie->setGeometry(QRect(230, 180, 21, 31));
+        Zaklocenie->setMinimumSize(QSize(20, 20));
+        Zaklocenie->setBaseSize(QSize(0, 0));
+        ZaklocenieLabel = new QLabel(OknoObiektARX);
+        ZaklocenieLabel->setObjectName("ZaklocenieLabel");
+        ZaklocenieLabel->setGeometry(QRect(120, 180, 91, 25));
+        ZaklocenieLabel->setFont(font2);
+        ZaklocenieLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         retranslateUi(OknoObiektARX);
         QObject::connect(ZatwierdzenieUstawien, &QDialogButtonBox::accepted, OknoObiektARX, qOverload<>(&QDialog::accept));
@@ -148,6 +161,8 @@ public:
         Blebel->setText(QCoreApplication::translate("OknoObiektARX", "B", nullptr));
         OpoznienieLabel->setText(QCoreApplication::translate("OknoObiektARX", "Op\303\263\305\272nienie", nullptr));
         ALebel->setText(QCoreApplication::translate("OknoObiektARX", "A", nullptr));
+        Zaklocenie->setText(QString());
+        ZaklocenieLabel->setText(QCoreApplication::translate("OknoObiektARX", "Zak\305\202\303\263cenie", nullptr));
     } // retranslateUi
 
 };

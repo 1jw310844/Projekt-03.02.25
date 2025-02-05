@@ -14,7 +14,7 @@ class Wykresy : public QObject
 {
     Q_OBJECT
 public:
-    explicit Wykresy(QWidget *parent = nullptr);
+    explicit Wykresy(QWidget *parent = nullptr,symulator* sym=nullptr);
     ~Wykresy();
     void inicjalizacjaWykresuWartosciZadanej(QVBoxLayout *layout);
     void inicjalizacjaWykresuUchybu(QVBoxLayout *layout);
@@ -26,9 +26,10 @@ public:
     void WykresWartosciSterowania();
     void AktualizujWykresy();
     void InicjalizujWykresy(QVBoxLayout *layout[4]);
-    void setSymulator(symulator* sym){s=sym;};
+    void setSymulator(symulator* sym){s=sym;}
+    symulator* getSymulator( ){return s;}
     void wyczyscLayout(QLayout* layout);
-    void ResetCzas(){czas=0;};
+    void ResetCzas(){czas=0;}
     void ResetujWykresy();
 private:
     QLineSeries *seria[7] = {nullptr};

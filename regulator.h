@@ -1,5 +1,6 @@
 #ifndef REGULATOR_H
 #define REGULATOR_H
+#include <cmath>
 
 
 class Regulator
