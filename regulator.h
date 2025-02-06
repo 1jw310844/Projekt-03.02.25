@@ -28,6 +28,13 @@ public:
     void setWzmocnienie(double w){wzmocnienieP=w;}
     void setStalaI(double si){stalaI=si;}
     void setStalaD(double sd){stalaD=sd;}
+    double getUchybPrzed() const;
+    double getPoprzedniUchybPrzed() const;
+    double getSumaUchybowPrzed() const;
+    double getWartoscSterujacaPrzed() const;
+    void setHistoriaRegulatora(double uchyb, double poprzedniUchyb, double sumaUchybow, double wartoscSterujaca);
+    void resetuj();
+
 };
 
 #endif // REGULATOR_H

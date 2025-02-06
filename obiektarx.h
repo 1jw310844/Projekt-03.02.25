@@ -33,6 +33,11 @@ public:
     void setStdev(double s){stdev =s;}
     void setGenerowacZaklocenie(bool z){GenerowacZaklocenie=z;}
     bool getGenerowacZaklocenie(){return GenerowacZaklocenie;}
+    void setHistoriaWejsciaWyjscia(std::deque<double> stare_ui, std::deque<double> stare_yi);
+    std::deque<double> getUi() const { return ui; }
+    std::deque<double> getYi() const { return yi; }
+    void resetujBufory();
+    //void resetuj();
 
 };
 

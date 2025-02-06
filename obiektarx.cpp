@@ -58,3 +58,25 @@ double ObiektARX::obliczWyjscie(double uii) {
 
     return wynik;
 }
+void ObiektARX::setHistoriaWejsciaWyjscia(std::deque<double> stare_ui, std::deque<double> stare_yi) {
+    ui = stare_ui;
+    yi = stare_yi;
+}
+void ObiektARX::resetujBufory() {
+    ui.clear();
+    yi.clear();
+}
+/*
+void ObiektARX::resetuj() {
+    k = 0;
+    z = 0;
+    a.clear();
+    b.clear();
+    ui.clear();
+    yi.clear();
+    mean = 0;
+    stdev = 0;
+    GenerowacZaklocenie = false;
+}
+*/
+

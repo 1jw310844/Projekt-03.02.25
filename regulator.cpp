@@ -60,3 +60,36 @@ void Regulator::ZerowanieNastawaP(){
     nastawaP=0;
     Uchyb=0;
 }
+double Regulator::getUchybPrzed() const {
+    return Uchyb;
+}
+
+double Regulator::getPoprzedniUchybPrzed() const {
+    return WczesniejszyUchyb;
+}
+
+double Regulator::getSumaUchybowPrzed() const {
+    return sumaUchybow;
+}
+
+double Regulator::getWartoscSterujacaPrzed() const {
+    return WartoscSterujaca;
+}
+
+void Regulator::setHistoriaRegulatora(double uchyb, double poprzedniUchyb, double sumaUchyb, double wartoscSterujaca) {
+    Uchyb = uchyb;
+    WczesniejszyUchyb = poprzedniUchyb;
+    sumaUchybow = sumaUchyb;
+    WartoscSterujaca = wartoscSterujaca;
+}
+void Regulator::resetuj() {
+    wartoscZadana = 0;
+    wzmocnienieP = 0;
+    stalaI = 0;
+    stalaD = 0;
+    Uchyb = 0;
+    WczesniejszyUchyb = 0;
+    sumaUchybow = 0;
+    WartoscSterujaca = 0;
+}
+

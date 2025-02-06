@@ -198,4 +198,32 @@ void WarstwaUslug::wczytajKonfiguracje() {
         s->setObiektARX(obiekt);
     }
 }
+/*
+void WarstwaUslug::resetujSymulator() {
+    if (!s) return;
+
+    // Reset regulatora
+    Regulator reg;
+    reg.resetuj();
+    s->setRegulator(reg);
+
+    // Reset obiektu ARX
+    ObiektARX obiekt;
+    obiekt.resetuj();
+    s->setObiektARX(obiekt);
+
+    // Reset generatora
+    Generator gen;
+    gen.resetuj();
+    s->setGenerator(gen);
+
+    // Zerowanie wyjścia obiektu i wartości sterującej
+    s->setWyjscieObiektu(0);
+    s->setLastRegulatorValue(0);
+    s->setLastObjectOutput(0);
+
+    qDebug() << "Symulator został całkowicie wyzerowany.";
+}
+*/
+
 

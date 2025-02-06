@@ -34,3 +34,10 @@ QString RodzajSygnaluToString(RodzajSygnalu rodzaj) {
         return "Nieznany";
     }
 }
+void Generator::resetuj() {
+    rodzaj = RodzajSygnalu::Skok;
+    A = 0;
+    T = 1.0;
+    p = 0.5;
+    czasAktywacji = 0;
+}

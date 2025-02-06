@@ -194,8 +194,7 @@ void MainWindow::on_UstawieniaRegulatora_clicked()
 }
 
 
-void MainWindow::on_Reset_clicked()
-{
+void MainWindow::on_Reset_clicked() {
     disconnect(simulationTimer, nullptr, nullptr, nullptr);
     simulationTimer->stop();
 
