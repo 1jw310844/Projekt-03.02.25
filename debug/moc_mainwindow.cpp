@@ -49,13 +49,11 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "on_UstawieniaObiektuARX_clicked",
     "on_UstawieniaRegulatora_clicked",
     "PokazWykres",
-    "symulator*",
-    "s",
     "Blad",
     "on_Reset_clicked",
     "on_Zapisz_clicked",
     "on_Wczytaj_clicked",
-    "Sprawdzenie"
+    "bladUstawien"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -81,12 +79,12 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
        6,    0,   91,    2, 0x08,    5 /* Private */,
        7,    0,   92,    2, 0x08,    6 /* Private */,
        8,    0,   93,    2, 0x08,    7 /* Private */,
-       9,    1,   94,    2, 0x08,    8 /* Private */,
-      12,    0,   97,    2, 0x08,   10 /* Private */,
-      13,    0,   98,    2, 0x08,   11 /* Private */,
-      14,    0,   99,    2, 0x08,   12 /* Private */,
-      15,    0,  100,    2, 0x08,   13 /* Private */,
-      16,    1,  101,    2, 0x08,   14 /* Private */,
+       9,    0,   94,    2, 0x08,    8 /* Private */,
+      10,    0,   95,    2, 0x08,    9 /* Private */,
+      11,    0,   96,    2, 0x08,   10 /* Private */,
+      12,    0,   97,    2, 0x08,   11 /* Private */,
+      13,    0,   98,    2, 0x08,   12 /* Private */,
+      14,    0,   99,    2, 0x08,   13 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -95,12 +93,12 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 10,   11,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -129,7 +127,6 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'PokazWykres'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<symulator *, std::false_type>,
         // method 'Blad'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_Reset_clicked'
@@ -138,9 +135,8 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_Wczytaj_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'Sprawdzenie'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<symulator *, std::false_type>
+        // method 'bladUstawien'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -156,12 +152,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->on_UstawieniaGeneratora_clicked(); break;
         case 4: _t->on_UstawieniaObiektuARX_clicked(); break;
         case 5: _t->on_UstawieniaRegulatora_clicked(); break;
-        case 6: _t->PokazWykres((*reinterpret_cast< std::add_pointer_t<symulator*>>(_a[1]))); break;
+        case 6: _t->PokazWykres(); break;
         case 7: _t->Blad(); break;
         case 8: _t->on_Reset_clicked(); break;
         case 9: _t->on_Zapisz_clicked(); break;
         case 10: _t->on_Wczytaj_clicked(); break;
-        case 11: _t->Sprawdzenie((*reinterpret_cast< std::add_pointer_t<symulator*>>(_a[1]))); break;
+        case 11: _t->bladUstawien(); break;
         default: ;
         }
     }

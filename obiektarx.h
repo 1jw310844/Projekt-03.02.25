@@ -37,7 +37,6 @@ public:
     std::deque<double> getUi() const { return ui; }
     std::deque<double> getYi() const { return yi; }
     void resetujBufory();
-    //void resetuj();
 
 };
 

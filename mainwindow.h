@@ -32,7 +32,8 @@ public:
     MainWindow(QWidget *parent = nullptr,
                WarstwaUslug* program = nullptr);
     ~MainWindow();
-    void UstawienieGUI();
+    void UstawienieWygladuGUI();
+    void UstawienieOkienOrazSygnalowIslotow();
 
 private slots:
     void on_Start_clicked();
@@ -41,12 +42,11 @@ private slots:
     void on_UstawieniaGeneratora_clicked();
     void on_UstawieniaObiektuARX_clicked();
     void on_UstawieniaRegulatora_clicked();
-    void PokazWykres(symulator* s);
+    void PokazWykres();
     void Blad();
     void on_Reset_clicked();
     void on_Zapisz_clicked();
     void on_Wczytaj_clicked();
-    void Sprawdzenie(symulator* s);
     void bladUstawien();
 private:
     Ui::MainWindow *ui;
@@ -57,13 +57,9 @@ private:
     OknoObiektARX* okno_obiekt;
     double czas;
     int interwalCzasowy=0;
-    bool isSimulationRunning=true;
     Wykresy* wykres;
     void UstawienieLayout();
     QVBoxLayout *layout[4];
-    void fileSelected(QString fileName);
-    QFile plik;
-    QString nazwaqPliku;
     void obslugaZapisu();
     QPushButton *Wczytaj;
 };

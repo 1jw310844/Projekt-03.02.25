@@ -8,7 +8,6 @@ symulator::symulator(Generator g, Regulator r, ObiektARX o)
 
 double symulator::symulujKrok(double czas) {
     double wartoscZadana = generator.generuj(czas);
-    qDebug() << "WZ: " << wartoscZadana;
     regulator.setWartoscZadana(wartoscZadana);
     regulator.aktualizujUchyb(wyjscieObiektu);
     double sygnalSterowania = regulator.obliczSterowanie();
@@ -24,9 +23,7 @@ double symulator::getZaklocenie() { return obiekt.getZaklocenie(); }
 double symulator::getSterowanie() { return regulator.getWartoscSterujaca(); }
 double symulator::getWyjscieObiektu() { return wyjscieObiektu; }
 void symulator::setGenerator(Generator &g) { generator = g; }
-//void symulator::setRegulator(Regulator &r) { regulator = r; }
-//void symulator::setObiektARX(ObiektARX &o) { obiekt = o; }
-void symulator::setRegulator(Regulator &r) {
+void symulator::setRegulatorzHistoria(Regulator &r) {
     double uchyb = regulator.getUchybPrzed();
     double poprzedniUchyb = regulator.getPoprzedniUchybPrzed();
     double sumaUchyb = regulator.getSumaUchybowPrzed();
@@ -34,14 +31,14 @@ void symulator::setRegulator(Regulator &r) {
     r.setHistoriaRegulatora(uchyb, poprzedniUchyb, sumaUchyb, wartoscSterujaca);
     regulator = r;
 }
-void symulator::setRegulator2(Regulator &r) {
+void symulator::setRegulator(Regulator &r) {
     regulator = r;
 }
-void symulator::setObiektARX(ObiektARX &o) {
+void symulator::setObiektARXzHistoria(ObiektARX &o) {
     o.setHistoriaWejsciaWyjscia(obiekt.getUi(), obiekt.getYi());
     obiekt = o;
 }
-void symulator::setObiektARX2(ObiektARX &o){
+void symulator::setObiektARX(ObiektARX &o){
     obiekt = o;
 }
 Generator symulator::getGenerator(){

@@ -18,6 +18,7 @@ public:
     ~OknoObiektARX();
     void setWarstwaUslug(WarstwaUslug* w){usluga=w;};
     void UstawienieARX();
+    void UstawieniaDomyslneWidgetow();
 private slots:
     void on_ZatwierdzenieUstawien_accepted();
 

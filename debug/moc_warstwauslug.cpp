@@ -42,10 +42,9 @@ static constexpr auto qt_meta_stringdata_ZN12WarstwaUslugE = QtMocHelpers::strin
     "WarstwaUslug",
     "PoprawneDane",
     "",
-    "symulator*",
-    "s",
     "BledneDane",
-    "sygnalZapisano"
+    "sygnalZapisano",
+    "blad"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -57,20 +56,22 @@ Q_CONSTINIT static const uint qt_meta_data_ZN12WarstwaUslugE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       3,       // signalCount
+       4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   32,    2, 0x06,    1 /* Public */,
-       5,    0,   35,    2, 0x06,    3 /* Public */,
-       6,    0,   36,    2, 0x06,    4 /* Public */,
+       1,    0,   38,    2, 0x06,    1 /* Public */,
+       3,    0,   39,    2, 0x06,    2 /* Public */,
+       4,    0,   40,    2, 0x06,    3 /* Public */,
+       5,    0,   41,    2, 0x06,    4 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -88,10 +89,11 @@ Q_CONSTINIT const QMetaObject WarstwaUslug::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<WarstwaUslug, std::true_type>,
         // method 'PoprawneDane'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<symulator *, std::false_type>,
         // method 'BledneDane'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'sygnalZapisano'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'blad'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -102,16 +104,17 @@ void WarstwaUslug::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     auto *_t = static_cast<WarstwaUslug *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->PoprawneDane((*reinterpret_cast< std::add_pointer_t<symulator*>>(_a[1]))); break;
+        case 0: _t->PoprawneDane(); break;
         case 1: _t->BledneDane(); break;
         case 2: _t->sygnalZapisano(); break;
+        case 3: _t->blad(); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _q_method_type = void (WarstwaUslug::*)(symulator * );
+            using _q_method_type = void (WarstwaUslug::*)();
             if (_q_method_type _q_method = &WarstwaUslug::PoprawneDane; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
@@ -128,6 +131,13 @@ void WarstwaUslug::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             using _q_method_type = void (WarstwaUslug::*)();
             if (_q_method_type _q_method = &WarstwaUslug::sygnalZapisano; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 2;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (WarstwaUslug::*)();
+            if (_q_method_type _q_method = &WarstwaUslug::blad; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 3;
                 return;
             }
         }
@@ -153,23 +163,22 @@ int WarstwaUslug::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }
 
 // SIGNAL 0
-void WarstwaUslug::PoprawneDane(symulator * _t1)
+void WarstwaUslug::PoprawneDane()
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
@@ -182,5 +191,11 @@ void WarstwaUslug::BledneDane()
 void WarstwaUslug::sygnalZapisano()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+}
+
+// SIGNAL 3
+void WarstwaUslug::blad()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
 }
 QT_WARNING_POP

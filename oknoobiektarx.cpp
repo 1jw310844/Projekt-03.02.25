@@ -11,6 +11,32 @@ OknoObiektARX::OknoObiektARX(QWidget *parent)
     ui->setupUi(this);
     obiekt = new ObiektARX;
     usluga = new WarstwaUslug;
+    UstawieniaDomyslneWidgetow();
+    UstawienieARX();
+}
+
+OknoObiektARX::~OknoObiektARX()
+{
+    delete this->ui;
+    this->ui=nullptr;
+    delete this->usluga;
+    this->usluga=nullptr;
+    delete this->obiekt;
+    this->obiekt=nullptr;
+}
+
+void OknoObiektARX::on_ZatwierdzenieUstawien_accepted()
+{
+    obiekt->setOpoznienie(ui->Opoznienie->value());
+    obiekt->setWielomianA({ui->A1->value(), ui->A2->value(), ui->A3->value()});
+    obiekt->setWielomianB({ui->B1->value(), ui->B2->value(), ui->B3->value()});
+    obiekt->setGenerowacZaklocenie(ui->Zaklocenie->isChecked());
+    usluga->SprawdzenieObiektu(obiekt);
+
+}
+
+void OknoObiektARX::UstawieniaDomyslneWidgetow(){
+
     ui->A1->setRange(-1000, 1000);
     ui->A1->setValue(0.5);
     ui->A2->setRange(-1000, 1000);
@@ -32,28 +58,6 @@ OknoObiektARX::OknoObiektARX(QWidget *parent)
     ui->B2->setSingleStep(0.1);
     ui->B3->setSingleStep(0.1);
     ui->Opoznienie->setSingleStep(0.1);
-    //ui->Zaklocenie->setCheckState(Qt::Checked);
-    UstawienieARX();
-}
-
-OknoObiektARX::~OknoObiektARX()
-{
-    delete this->ui;
-    this->ui=nullptr;
-    delete this->usluga;
-    this->usluga=nullptr;
-    //delete this->obiekt;
-    this->obiekt=nullptr;
-}
-
-void OknoObiektARX::on_ZatwierdzenieUstawien_accepted()
-{
-    obiekt->setOpoznienie(ui->Opoznienie->value());
-    obiekt->setWielomianA({ui->A1->value(), ui->A2->value(), ui->A3->value()});
-    obiekt->setWielomianB({ui->B1->value(), ui->B2->value(), ui->B3->value()});
-    obiekt->setGenerowacZaklocenie(ui->Zaklocenie->isChecked());
-    usluga->SprawdzenieObiektu(obiekt);
-
 }
 void OknoObiektARX::UstawienieARX()
 {

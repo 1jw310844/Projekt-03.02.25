@@ -15,74 +15,166 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_OknoRegulator
 {
 public:
-    QDialogButtonBox *ZatwierdzenieUstawien;
-    QLabel *NastawaIopis;
-    QDoubleSpinBox *Wzmocnienie;
-    QLabel *label_13;
-    QDoubleSpinBox *StalaD;
-    QDoubleSpinBox *StalaI;
-    QLabel *label_14;
-    QLabel *NastawaDopis;
-    QLabel *NastawaPopis;
+    QVBoxLayout *verticalLayout_5;
+    QVBoxLayout *verticalLayout_4;
+    QVBoxLayout *verticalLayout_3;
     QLabel *label_12;
+    QHBoxLayout *horizontalLayout;
+    QLabel *NastawaPopis;
+    QDoubleSpinBox *Wzmocnienie;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *label_13;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *NastawaIopis;
+    QDoubleSpinBox *StalaI;
+    QVBoxLayout *verticalLayout;
+    QLabel *label_14;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *NastawaDopis;
+    QDoubleSpinBox *StalaD;
+    QDialogButtonBox *ZatwierdzenieUstawien;
 
     void setupUi(QDialog *OknoRegulator)
     {
         if (OknoRegulator->objectName().isEmpty())
             OknoRegulator->setObjectName("OknoRegulator");
-        OknoRegulator->resize(400, 300);
-        ZatwierdzenieUstawien = new QDialogButtonBox(OknoRegulator);
-        ZatwierdzenieUstawien->setObjectName("ZatwierdzenieUstawien");
-        ZatwierdzenieUstawien->setGeometry(QRect(-70, 220, 341, 32));
-        ZatwierdzenieUstawien->setOrientation(Qt::Orientation::Horizontal);
-        ZatwierdzenieUstawien->setStandardButtons(QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok);
-        NastawaIopis = new QLabel(OknoRegulator);
-        NastawaIopis->setObjectName("NastawaIopis");
-        NastawaIopis->setGeometry(QRect(90, 120, 81, 31));
+        OknoRegulator->resize(220, 222);
+        OknoRegulator->setMinimumSize(QSize(220, 222));
+        OknoRegulator->setMaximumSize(QSize(500, 500));
+        verticalLayout_5 = new QVBoxLayout(OknoRegulator);
+        verticalLayout_5->setObjectName("verticalLayout_5");
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName("verticalLayout_4");
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName("verticalLayout_3");
+        label_12 = new QLabel(OknoRegulator);
+        label_12->setObjectName("label_12");
         QFont font;
         font.setPointSize(10);
         font.setBold(true);
-        NastawaIopis->setFont(font);
-        NastawaIopis->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        Wzmocnienie = new QDoubleSpinBox(OknoRegulator);
-        Wzmocnienie->setObjectName("Wzmocnienie");
-        Wzmocnienie->setGeometry(QRect(170, 60, 112, 31));
-        label_13 = new QLabel(OknoRegulator);
-        label_13->setObjectName("label_13");
-        label_13->setGeometry(QRect(170, 100, 112, 17));
-        label_13->setFont(font);
-        label_13->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        StalaD = new QDoubleSpinBox(OknoRegulator);
-        StalaD->setObjectName("StalaD");
-        StalaD->setGeometry(QRect(170, 180, 112, 31));
-        StalaI = new QDoubleSpinBox(OknoRegulator);
-        StalaI->setObjectName("StalaI");
-        StalaI->setGeometry(QRect(170, 120, 112, 31));
-        label_14 = new QLabel(OknoRegulator);
-        label_14->setObjectName("label_14");
-        label_14->setGeometry(QRect(170, 160, 131, 21));
-        label_14->setFont(font);
-        NastawaDopis = new QLabel(OknoRegulator);
-        NastawaDopis->setObjectName("NastawaDopis");
-        NastawaDopis->setGeometry(QRect(90, 180, 81, 31));
-        NastawaDopis->setFont(font);
-        NastawaDopis->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        NastawaPopis = new QLabel(OknoRegulator);
-        NastawaPopis->setObjectName("NastawaPopis");
-        NastawaPopis->setGeometry(QRect(90, 60, 81, 31));
-        NastawaPopis->setFont(font);
-        label_12 = new QLabel(OknoRegulator);
-        label_12->setObjectName("label_12");
-        label_12->setGeometry(QRect(170, 40, 112, 17));
         label_12->setFont(font);
         label_12->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_3->addWidget(label_12);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
+        NastawaPopis = new QLabel(OknoRegulator);
+        NastawaPopis->setObjectName("NastawaPopis");
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(NastawaPopis->sizePolicy().hasHeightForWidth());
+        NastawaPopis->setSizePolicy(sizePolicy);
+        NastawaPopis->setFont(font);
+
+        horizontalLayout->addWidget(NastawaPopis);
+
+        Wzmocnienie = new QDoubleSpinBox(OknoRegulator);
+        Wzmocnienie->setObjectName("Wzmocnienie");
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(Wzmocnienie->sizePolicy().hasHeightForWidth());
+        Wzmocnienie->setSizePolicy(sizePolicy1);
+        Wzmocnienie->setMinimumSize(QSize(108, 0));
+
+        horizontalLayout->addWidget(Wzmocnienie);
+
+
+        verticalLayout_3->addLayout(horizontalLayout);
+
+
+        verticalLayout_4->addLayout(verticalLayout_3);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        label_13 = new QLabel(OknoRegulator);
+        label_13->setObjectName("label_13");
+        label_13->setFont(font);
+        label_13->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_2->addWidget(label_13);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        NastawaIopis = new QLabel(OknoRegulator);
+        NastawaIopis->setObjectName("NastawaIopis");
+        sizePolicy.setHeightForWidth(NastawaIopis->sizePolicy().hasHeightForWidth());
+        NastawaIopis->setSizePolicy(sizePolicy);
+        NastawaIopis->setMinimumSize(QSize(72, 22));
+        NastawaIopis->setFont(font);
+        NastawaIopis->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        horizontalLayout_2->addWidget(NastawaIopis);
+
+        StalaI = new QDoubleSpinBox(OknoRegulator);
+        StalaI->setObjectName("StalaI");
+        sizePolicy1.setHeightForWidth(StalaI->sizePolicy().hasHeightForWidth());
+        StalaI->setSizePolicy(sizePolicy1);
+        StalaI->setMinimumSize(QSize(108, 0));
+
+        horizontalLayout_2->addWidget(StalaI);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
+
+        verticalLayout_4->addLayout(verticalLayout_2);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
+        label_14 = new QLabel(OknoRegulator);
+        label_14->setObjectName("label_14");
+        label_14->setFont(font);
+        label_14->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout->addWidget(label_14);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        NastawaDopis = new QLabel(OknoRegulator);
+        NastawaDopis->setObjectName("NastawaDopis");
+        sizePolicy.setHeightForWidth(NastawaDopis->sizePolicy().hasHeightForWidth());
+        NastawaDopis->setSizePolicy(sizePolicy);
+        NastawaDopis->setMinimumSize(QSize(72, 0));
+        NastawaDopis->setFont(font);
+        NastawaDopis->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        horizontalLayout_3->addWidget(NastawaDopis);
+
+        StalaD = new QDoubleSpinBox(OknoRegulator);
+        StalaD->setObjectName("StalaD");
+        sizePolicy1.setHeightForWidth(StalaD->sizePolicy().hasHeightForWidth());
+        StalaD->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_3->addWidget(StalaD);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+
+        verticalLayout_4->addLayout(verticalLayout);
+
+        ZatwierdzenieUstawien = new QDialogButtonBox(OknoRegulator);
+        ZatwierdzenieUstawien->setObjectName("ZatwierdzenieUstawien");
+        ZatwierdzenieUstawien->setOrientation(Qt::Orientation::Horizontal);
+        ZatwierdzenieUstawien->setStandardButtons(QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok);
+
+        verticalLayout_4->addWidget(ZatwierdzenieUstawien);
+
+
+        verticalLayout_5->addLayout(verticalLayout_4);
+
 
         retranslateUi(OknoRegulator);
         QObject::connect(ZatwierdzenieUstawien, &QDialogButtonBox::accepted, OknoRegulator, qOverload<>(&QDialog::accept));
@@ -94,12 +186,12 @@ public:
     void retranslateUi(QDialog *OknoRegulator)
     {
         OknoRegulator->setWindowTitle(QCoreApplication::translate("OknoRegulator", "Dialog", nullptr));
-        NastawaIopis->setText(QCoreApplication::translate("OknoRegulator", "Nastawa I", nullptr));
-        label_13->setText(QCoreApplication::translate("OknoRegulator", "Sta\305\202a Ca\305\202kuj\304\205ca", nullptr));
-        label_14->setText(QCoreApplication::translate("OknoRegulator", "Sta\305\202a R\303\263\305\274niczkuj\304\205ca", nullptr));
-        NastawaDopis->setText(QCoreApplication::translate("OknoRegulator", "Nastawa D", nullptr));
-        NastawaPopis->setText(QCoreApplication::translate("OknoRegulator", "Nastawa P", nullptr));
         label_12->setText(QCoreApplication::translate("OknoRegulator", "Wzmocnienie", nullptr));
+        NastawaPopis->setText(QCoreApplication::translate("OknoRegulator", "Nastawa P: ", nullptr));
+        label_13->setText(QCoreApplication::translate("OknoRegulator", "Sta\305\202a Ca\305\202kuj\304\205ca", nullptr));
+        NastawaIopis->setText(QCoreApplication::translate("OknoRegulator", "Nastawa I:   ", nullptr));
+        label_14->setText(QCoreApplication::translate("OknoRegulator", "Sta\305\202a R\303\263\305\274niczkuj\304\205ca", nullptr));
+        NastawaDopis->setText(QCoreApplication::translate("OknoRegulator", "Nastawa D: ", nullptr));
     } // retranslateUi
 
 };

@@ -34,8 +34,8 @@ public:
     double getLastRegulatorValue()  { return lastRegulatorValue; }
     double getLastObjectOutput()  { return lastObjectOutput; }
     void setWyjscieObiektu(double wo){wyjscieObiektu=wo;};
-    void setObiektARX2(ObiektARX &o);
-    void setRegulator2(Regulator &r);
+    void setObiektARXzHistoria(ObiektARX &o);
+    void setRegulatorzHistoria(Regulator &r);
 };
 
 #endif // SYMULATOR_H

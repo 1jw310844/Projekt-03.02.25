@@ -40,15 +40,11 @@ double ObiektARX::obliczWyjscie(double uii) {
             wynik -= a[j] * yi[j];
         }
     }
-
+    z = zaklocenie(generator);
     if (GenerowacZaklocenie) {
-        qDebug() << "Zaklocenie jest WŁĄCZONE";
-        z = zaklocenie(generator);
-        wynik += z;
-    } else {
-        qDebug() << "Zaklocenie jest WYŁĄCZONE";
-    }
 
+        wynik += z;
+    }
 
 
     yi.push_front(wynik);
@@ -66,17 +62,4 @@ void ObiektARX::resetujBufory() {
     ui.clear();
     yi.clear();
 }
-/*
-void ObiektARX::resetuj() {
-    k = 0;
-    z = 0;
-    a.clear();
-    b.clear();
-    ui.clear();
-    yi.clear();
-    mean = 0;
-    stdev = 0;
-    GenerowacZaklocenie = false;
-}
-*/
 

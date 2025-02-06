@@ -1,5 +1,5 @@
 #include "warstwauslug.h"
-#include "generator.h"
+
 WarstwaUslug::WarstwaUslug(QObject *parent)
     : QObject{parent}, s(new symulator())
 {}
@@ -19,7 +19,7 @@ void WarstwaUslug::SprawdzenieGeneratora(Generator* g){
 void WarstwaUslug::SprawdzenieRegulatora(Regulator* r){
     if(r->getStalaD() >= 0 && r->getStalaI() >= 0 && r->getWzmocnienie() >= 0) {
         if(r->getStalaD() > 0 || r->getStalaI() > 0 || r->getWzmocnienie() > 0) {
-            s->setRegulator(*r);
+            s->setRegulatorzHistoria(*r);
         }else{
             emit blad();
         }
@@ -40,7 +40,7 @@ void WarstwaUslug::SprawdzenieObiektu(ObiektARX* o){
     }
     if(b != 3 && a != 3 && o->getOpoznienie() >= 0) {
 
-        s->setObiektARX(*o);
+        s->setObiektARXzHistoria(*o);
 
     }else{
         emit blad();
@@ -55,37 +55,25 @@ void WarstwaUslug::SprawdzenieWszystkichDanych(double i) {
 
     Generator generator = s->getGenerator();
 
-    qDebug() << "Sprawdzam generator typu: " << RodzajSygnaluToString(generator.getRodzaj());
-
     if (generator.getRodzaj() == RodzajSygnalu::Skok && generator.getAmplituda() <= 0) {
         poprawnyGenerator = false;
-        qDebug() << "Błędna amplituda dla skoku!";
     }
     else if (generator.getRodzaj() == RodzajSygnalu::Sinusoida) {
-        qDebug() << "Sprawdzam sinusoidę - Amplituda: " << generator.getAmplituda()
-        << " Okres: " << generator.getOkres();
         if (generator.getAmplituda() <= 0 || generator.getOkres() <= 0) {
             poprawnyGenerator = false;
-            qDebug() << "Błędne dane dla sinusoidy!";
         }
     }
     else if (generator.getRodzaj() == RodzajSygnalu::Prostokatny) {
         if (generator.getAmplituda() <= 0 || generator.getOkres() <= 0 ||
             generator.getWypelnienie() <= 0 || generator.getWypelnienie() > 1) {
             poprawnyGenerator = false;
-            qDebug() << "Błędne dane dla prostokątnego sygnału!";
         }
     }
-
-    // Sprawdzanie regulatora
     Regulator regulator = s->getRegulator();
     if (regulator.getStalaD() < 0 || regulator.getStalaI() < 0 || regulator.getWzmocnienie() < 0 ||
         (regulator.getStalaD() == 0 && regulator.getStalaI() == 0 && regulator.getWzmocnienie() == 0)) {
         poprawnyRegulator = false;
-        qDebug() << "Błędne dane dla regulatora!";
     }
-
-    // Sprawdzanie obiektu ARX
     ObiektARX obiekt = s->getObiektARX();
     int liczbaZerA = 0;
     int liczbaZerB = 0;
@@ -97,14 +85,12 @@ void WarstwaUslug::SprawdzenieWszystkichDanych(double i) {
     }
     if (liczbaZerA == 3 || liczbaZerB == 3 || obiekt.getOpoznienie() < 0) {
         poprawnyObiekt = false;
-        qDebug() << "Błędne dane dla obiektu ARX!";
     }
 
-    // Emitowanie sygnałów
     if (!poprawnyGenerator || !poprawnyRegulator || !poprawnyObiekt || i <= 0) {
         emit BledneDane();
     } else {
-        emit PoprawneDane(s);
+        emit PoprawneDane();
     }
 }
 
@@ -206,32 +192,32 @@ void WarstwaUslug::wczytajKonfiguracje() {
         s->setObiektARX(obiekt);
     }
 }
-/*
-void WarstwaUslug::resetujSymulator() {
-    if (!s) return;
+void WarstwaUslug::ResetSymulacji(double &c, int &i){
+    symulator* sym = s;
+    if (sym) {
+        sym->getRegulator().ZerowanieNastawaP();
+        sym->getRegulator().ZerowanieNastawaI();
+        sym->getRegulator().ZerowanieNastawaD();
+        sym->setWyjscieObiektu(0);
+        sym->setLastRegulatorValue(0);
+        sym->setLastObjectOutput(0);
 
-    // Reset regulatora
-    Regulator reg;
-    reg.resetuj();
-    s->setRegulator(reg);
+        Generator gen = sym->getGenerator();
+        gen.setAmplituda(0);
+        gen.setOkres(0);
+        gen.setWypelnienie(0);
+        sym->setGenerator(gen);
 
-    // Reset obiektu ARX
-    ObiektARX obiekt;
-    obiekt.resetuj();
-    s->setObiektARX(obiekt);
+        Regulator reg;
+        sym->setRegulator(reg);
 
-    // Reset generatora
-    Generator gen;
-    gen.resetuj();
-    s->setGenerator(gen);
+        ObiektARX obiekt;
+        sym->setObiektARX(obiekt);
+        c=0.0;
+        i=0.0;
 
-    // Zerowanie wyjścia obiektu i wartości sterującej
-    s->setWyjscieObiektu(0);
-    s->setLastRegulatorValue(0);
-    s->setLastObjectOutput(0);
-
-    qDebug() << "Symulator został całkowicie wyzerowany.";
+    }
 }
-*/
+
 
 

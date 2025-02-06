@@ -1,7 +1,7 @@
 #include "wykresy.h"
 
 Wykresy::Wykresy(QWidget *parent,symulator* sym)
-    : QObject(nullptr),parent(parent),s(sym),czas(0.0)
+    : QObject(nullptr),czas(0.0),parent(parent),s(sym)
 {
 
 }
@@ -18,7 +18,7 @@ Wykresy::~Wykresy()
         if (Widok[i]) delete Widok[i];
     }
 
-    //delete s;
+
 }
 
 void Wykresy::wyczyscLayout(QLayout* layout) {
@@ -130,10 +130,7 @@ void Wykresy::inicjalizacjaWykresuWartosciSterowania(QVBoxLayout *layout){
     layout->addWidget(Widok[3]);
 }
 void Wykresy::WykresWartosciZadanej() {
-    if (!s) {
-        qDebug() << "Błąd: wskaźnik 's' nie został poprawnie zainicjalizowany!";
-        return;
-    }
+
 
     double wyjscieObiektu = s->symulujKrok(czas);
     seria[0]->append(czas, wyjscieObiektu);

@@ -17,8 +17,8 @@ public:
     explicit OknoGenerator(QWidget *parent = nullptr);
     ~OknoGenerator();
     void setWarstwaUslug(WarstwaUslug* w){usluga=w;};
-    void UstawienieGUI();
-    void UstawienieOkna();
+    void UstawienieWygladuGUI();
+    void UstawienieWygladuOkna();
 private slots:
     void on_RodzajeSygnalu_clicked();
     void on_RodzajeSygnalu_triggered(QAction *arg1);

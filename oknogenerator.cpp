@@ -17,7 +17,7 @@ OknoGenerator::OknoGenerator(QWidget *parent)
     ui->RodzajeSygnalu->addAction("Sygnał Skokowy");
     ui->RodzajeSygnalu->addAction("Sygnał Sinusoidalny");
     ui->RodzajeSygnalu->addAction("Sygnał Prostokątny");
-    UstawienieOkna();
+    UstawienieWygladuOkna();
 }
 
 OknoGenerator::~OknoGenerator()
@@ -57,11 +57,11 @@ void OknoGenerator::on_ZatwierdzenieUstawien_accepted()
     gen->setWypelnienie(ui->Wypelnienie->value());
     usluga->SprawdzenieGeneratora(gen);
 }
-void OknoGenerator::UstawienieGUI(){
+void OknoGenerator::UstawienieWygladuGUI(){
     this->setStyleSheet("background-color: rgb(90,90,90);");
 }
 
-void OknoGenerator::UstawienieOkna(){
+void OknoGenerator::UstawienieWygladuOkna(){
 
     this->setStyleSheet("background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, "
                         "stop:0 rgb(50, 50, 50), stop:1 rgb(30, 30, 30)); "

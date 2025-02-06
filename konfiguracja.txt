@@ -1,5 +1,5 @@
-Amplituda: 66
-Okres: 1
+Amplituda: 10
+Okres: 0
 Wypelnienie: 0
 Rodzaj Sygnalu: 0
 Wzmocnienie: 0.1

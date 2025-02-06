@@ -14,7 +14,7 @@
 #include <QtWidgets/QMainWindow>
 #include "symulator.h"
 #include <QtWidgets>
-#include "generator.h"
+#include "Generator.h"
 class MainWindow;
 
 class WarstwaUslug : public QObject
@@ -31,9 +31,9 @@ public:
     symulator* getSymulator(){return s;};
     void zapiszKonfiguracje();
     void wczytajKonfiguracje();
-    //void resetujSymulator();
+    void ResetSymulacji(double &c,int& i);
 signals:
-    void PoprawneDane(symulator* s);
+    void PoprawneDane();
     void BledneDane();
     void sygnalZapisano();
     void blad();
