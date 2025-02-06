@@ -36,6 +36,7 @@ signals:
     void PoprawneDane(symulator* s);
     void BledneDane();
     void sygnalZapisano();
+    void blad();
 private:
     symulator* s;
     double interwal;

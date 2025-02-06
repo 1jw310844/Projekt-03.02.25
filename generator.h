@@ -19,8 +19,8 @@ public:
     double getWypelnienie() const { return p; }
     void setRodzaj(RodzajSygnalu r) { rodzaj = r; }
     void setAmplituda(double a) { A = a; }
-    void setOkres(double o) { T = (o > 0) ? o : 1.0; } // tutaj blad
-    void setWypelnienie(double w) { p = (w >= 0 && w <= 1) ? w : 0.5; }
+    void setOkres(double o) { T = o; } // tutaj blad
+    void setWypelnienie(double w) { p = w; }
     void setCzasAktywacji(double ca) { czasAktywacji = ca; }
     void resetuj();
 

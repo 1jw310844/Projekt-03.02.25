@@ -34,8 +34,14 @@ void symulator::setRegulator(Regulator &r) {
     r.setHistoriaRegulatora(uchyb, poprzedniUchyb, sumaUchyb, wartoscSterujaca);
     regulator = r;
 }
+void symulator::setRegulator2(Regulator &r) {
+    regulator = r;
+}
 void symulator::setObiektARX(ObiektARX &o) {
     o.setHistoriaWejsciaWyjscia(obiekt.getUi(), obiekt.getYi());
+    obiekt = o;
+}
+void symulator::setObiektARX2(ObiektARX &o){
     obiekt = o;
 }
 Generator symulator::getGenerator(){

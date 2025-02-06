@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent, WarstwaUslug *prog)
     connect(usluga, &WarstwaUslug::sygnalZapisano, this, &MainWindow::obslugaZapisu);
     Wczytaj = new QPushButton("Wczytaj konfigurację", this);
     connect(Wczytaj, &QPushButton::clicked, this, &MainWindow::on_Wczytaj_clicked);
+    connect(usluga, &WarstwaUslug::blad, this, &MainWindow::bladUstawien);
 }
 
 MainWindow::~MainWindow()
@@ -192,7 +193,10 @@ void MainWindow::on_UstawieniaRegulatora_clicked()
     //delete this->okno_reg;
     //this->okno_reg=nullptr;
 }
-
+void MainWindow::bladUstawien()
+{
+    QMessageBox::information(this, "Informacja", "Sprawdź czy poprawnie uzupełniłeś wszystkie dane");
+}
 
 void MainWindow::on_Reset_clicked() {
     disconnect(simulationTimer, nullptr, nullptr, nullptr);
@@ -217,10 +221,10 @@ void MainWindow::on_Reset_clicked() {
         sym->setGenerator(gen);
 
         Regulator reg;
-        sym->setRegulator(reg);
+        sym->setRegulator2(reg);
 
         ObiektARX obiekt;
-        sym->setObiektARX(obiekt);
+        sym->setObiektARX2(obiekt);
     }
     czas = 0;
     interwalCzasowy = 0;

@@ -11,6 +11,8 @@ void WarstwaUslug::SprawdzenieGeneratora(Generator* g){
         s->setGenerator(*g);
     } else if(g->getRodzaj() == RodzajSygnalu::Prostokatny && g->getAmplituda() > 0 && g->getOkres() > 0 && g->getWypelnienie() > 0 && g->getWypelnienie() <= 1) {
         s->setGenerator(*g);
+    }else{
+        emit blad();
     }
 }
 
@@ -18,7 +20,11 @@ void WarstwaUslug::SprawdzenieRegulatora(Regulator* r){
     if(r->getStalaD() >= 0 && r->getStalaI() >= 0 && r->getWzmocnienie() >= 0) {
         if(r->getStalaD() > 0 || r->getStalaI() > 0 || r->getWzmocnienie() > 0) {
             s->setRegulator(*r);
+        }else{
+            emit blad();
         }
+    }else{
+        emit blad();
     }
 }
 
@@ -36,6 +42,8 @@ void WarstwaUslug::SprawdzenieObiektu(ObiektARX* o){
 
         s->setObiektARX(*o);
 
+    }else{
+        emit blad();
     }
 }
 

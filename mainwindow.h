@@ -47,7 +47,7 @@ private slots:
     void on_Zapisz_clicked();
     void on_Wczytaj_clicked();
     void Sprawdzenie(symulator* s);
-
+    void bladUstawien();
 private:
     Ui::MainWindow *ui;
     QTimer *simulationTimer;
